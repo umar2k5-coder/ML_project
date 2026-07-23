@@ -1,5 +1,5 @@
 import sys
-from logger import logger
+from src.logger import logging
 def error_message_detail(error, error_detail: sys):
     """
     Extracts the file name, line number, and error message from the system traceback.
