@@ -88,11 +88,11 @@ class DataTransformation:
             target_column_name = "math_score"
 
             # 3. Separate features and targets for training data
-            input_feature_train_df = train_df.drop(columns=[target_column_name], axis=1)
+            input_feature_train_df = train_df.drop(columns=[target_column_name])
             target_feature_train_df = train_df[target_column_name]
 
             # 4. Separate features and targets for testing data
-            input_feature_test_df = test_df.drop(columns=[target_column_name], axis=1)
+            input_feature_test_df = test_df.drop(columns=[target_column_name])
             target_feature_test_df = test_df[target_column_name]
 
             logging.info("Applying preprocessing object on training and testing dataframes.")
@@ -123,3 +123,13 @@ class DataTransformation:
 
         except Exception as e:
             raise CustomException(e, sys)
+
+
+if __name__ == "__main__":
+    # Specify paths where Data Ingestion saved your train and test CSVs
+    train_path = os.path.join("artifacts", "train.csv")
+    test_path = os.path.join("artifacts", "test.csv")
+
+    obj = DataTransformation()
+    train_arr, test_arr, preprocessor_path = obj.initiate_data_transformation(train_path, test_path)
+    print(f"Transformation complete! Preprocessor saved at: {preprocessor_path}")        
